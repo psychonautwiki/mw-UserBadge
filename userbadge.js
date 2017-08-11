@@ -4,7 +4,7 @@ class UserBadges {
 
         this._userMapping = {
             /*userName: bureaucrat|sysop|scholar*/
-        }
+        };
 
         this._retrieveUsers();
     }
@@ -39,9 +39,8 @@ class UserBadges {
     }
 
     _getGroupFromUser(user) {
-        //if (user['groups'].indexOf('bureaucrat') !== -1) {
-        if (user['name'] === 'Apx') {
-            return 'bureaucrat';
+        if (user['groups'].indexOf('medium') !== -1) {
+            return 'medium';
         }
 
         if (user['groups'].indexOf('admin') !== -1) {
