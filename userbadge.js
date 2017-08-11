@@ -47,6 +47,10 @@ class UserBadges {
             return 'admin';
         }
 
+        if (user['groups'].indexOf('sentinel') !== -1) {
+            return 'sentinel';
+        }
+
         if (user['groups'].indexOf('scholar') !== -1) {
             return 'scholar';
         }
