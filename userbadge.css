@@ -23,6 +23,28 @@ a.mw-ug-admin, a.mw-ug-scholar.mw-ug-admin {
     font-size: 105%;
 }
 
+.profile-actions div.profile-special {
+    display: inline-block;
+    font-weight: 700;
+    margin: 0 5px;
+}
+
+.profile-actions div.profile-special.profile-admin {
+    color: #006400 !important;
+}
+
+.profile-actions div.profile-special.profile-medium {
+    color: #000000 !important;
+}
+
+.profile-actions div.profile-special.profile-scholar {
+    color: #0040B9 !important;
+}
+
+.profile-actions div.profile-special.profile-sentinel {
+    color: #C12940 !important;
+}
+
 /* Apx: Add badge for user types */
 
 .mw-ug-admin::after {

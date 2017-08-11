@@ -6,6 +6,13 @@ class UserBadges {
             /*userName: bureaucrat|sysop|scholar*/
         };
 
+        this._levelDisplayText = {
+            medium: 'System Operator',
+            admin: 'Administrator',
+            sentinel: 'Moderator',
+            scholar: 'Scholar'
+        };
+
         this._retrieveUsers();
     }
 
@@ -63,10 +70,37 @@ class UserBadges {
             this._userMapping[user['name']] = this._getGroupFromUser(user);
         });
 
-        this._initRewrite();
+        this._rewriteUserLinks();
+        this._addUserLevelToProfile();
     }
 
-    _initRewrite() {
+    _addUserLevelToProfile() {
+        const pageName = window['mw']['config']['get']('wgPageName');
+
+        const userName = pageName && /^User:(.*?)$/.exec(pageName);
+
+        if (!userName || !userName[1]) {
+            return;
+        }
+
+        const profileUserLevel = this._userMapping[userName[1]];
+        const levelDisplayText = this._levelDisplayText[profileUserLevel];
+
+        const actionsContainer = document.getElementsByClassName('profile-actions')[0];
+
+        if (profileUserLevel && levelDisplayText && actionsContainer) {
+            const prevActions = actionsContainer.innerHTML;
+
+            const profileLevelClass = `profile-special profile-${profileUserLevel}`;
+
+            actionsContainer.innerHTML =
+                `<div class='${profileLevelClass}'>
+                    ${levelDisplayText}
+                </div> | ${prevActions}`;
+        }
+    }
+
+    _rewriteUserLinks() {
         Array.prototype.slice.call(document.getElementsByTagName('a')).forEach(item =>
             this._doUserRewriteForElement(item)
         );
