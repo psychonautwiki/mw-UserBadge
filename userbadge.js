@@ -1,6 +1,6 @@
 class UserBadges {
     constructor() {
-        this._userEndpoint = 'https://psychonautwiki.global.ssl.fastly.net/w/api.php?action=query&list=allusers&auprop=groups&augroup=bureaucrat|sysop|scholar&aulimit=100&format=json';
+        this._userEndpoint = 'https://psychonautwiki.global.ssl.fastly.net/w/api.php?action=query&list=allusers&auprop=groups&augroup=bureaucrat|sysop|scholar|donor&aulimit=100&format=json';
 
         this._userMapping = {
             /*userName: bureaucrat|sysop|scholar*/
@@ -10,7 +10,8 @@ class UserBadges {
             medium: 'System Operator',
             admin: 'Administrator',
             sentinel: 'Moderator',
-            scholar: 'Scholar'
+            scholar: 'Scholar',
+            donor: 'Donor'
         };
 
         this._retrieveUsers();
@@ -60,6 +61,10 @@ class UserBadges {
 
         if (user['groups'].indexOf('scholar') !== -1) {
             return 'scholar';
+        }
+
+        if (user['groups'].indexOf('donor') !== -1) {
+            return 'donor';
         }
     }
 
